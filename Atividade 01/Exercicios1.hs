@@ -13,18 +13,26 @@ mult35 :: Integer -> Bool
 mult35 x = mult3 x && mult5 x
 
 -- 05 Faça um programa que retorne True caso a entrada seja menor que -1 ou (maior que 1 E múltiplo de 2), e False caso contrário.
-mult35 :: Integer -> Bool
-mult35 x = mult3 x && mult5 x
+testNum :: Integer -> Bool
+testNum x 
+  | x < -1 = True
+  | otherwise = False
 
 -- 06 Faça uma função que recebe um tipo Integer e retorna ele dividido por 2:
-divd2 :: Integer -> Double
-divd2 x = x/2
+div2d :: Integer -> Double
+div2d x = fromIntegral(x) / 2
 
-
--- 07 Faça uma função que receba um ângulo a e retorne uma tupla contendo o seno da metade desse ângulo utilizando a identidade:
+-- 07 Faça uma função que receba um ângulo a e retorne uma tupla contendo o seno da metade desse ângulo utilizando a identidade.
+senTeta2 :: Double -> (Double,Double)
+senTeta2 x = (sqrt ((1 - cos x) / 2),-sqrt ((1 - cos x) / 2))
 
 
 -- 08 Crie uma lista de anos bissextos desde o ano 1 até o atual.
+ehBissexto :: Integer -> Bool
+ehBissexto x = False
+
+listBissextos :: Integer -> Integer -> [Integer]
+listBissextos x y = [1..10]
 
 -- 09 Encontre os 10 primeiros anos bissextos.
 
@@ -38,8 +46,8 @@ divd2 x = x/2
 
 -- Validação Simples
 main = do
-  let ex1a = mult35 12
-  let ex1b = mult35 15
+  let ex1a = listBissextos 90 2
+  let ex1b = listBissextos 60 2
   
   print(ex1a,ex1b)
 
