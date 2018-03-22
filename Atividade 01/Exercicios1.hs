@@ -1,4 +1,4 @@
--- 01 Execute as seguintes operações utilizando o menor número de parênteses:
+-- 01 Execute as seguintes operações utilizando o menor número de parênteses:2*3+5 2+2*3+1 3^4+5 * 2^5 +1
 
 -- 02 Faça uma função mult3 x que retorne True caso a entrada seja múltiplo de 3 e False caso contrário.
 mult3 :: Integer -> Bool
