@@ -18,7 +18,7 @@ div2d :: Integer -> Double
 -- 07 Faa uma função que receba um ângulo a e retorne uma tupla contendo o seno da metade desse ângulo utilizando a identidade:
 
 sin(x/2)=±1−cos(x)2−−−−−−√
-Exercício 08: Crie uma lista de anos bissextos desde o ano 1 até o atual.
+-- 08 Crie uma lista de anos bissextos desde o ano 1 até o atual.
 
 -- 09 Encontre os 10 primeiros anos bissextos.
 
