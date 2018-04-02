@@ -55,10 +55,12 @@ collatzLen :: Integer -> Integer
 collatzLen x = collatzLoop 1 x
 
 -- 08: Encontre o número x entre 1 e 1.000.000 que tem a maior sequência de Collatz. (Project Euler 14)
+--Versão encontrada no site https://wiki.haskell.org/Euler_problems/11_to_20
 colmax x n = x `max` (collatzLen n, n) 
 search nums = foldl colmax (1,1) nums
 projectEuler14 = search [1..1000000]
-
+-- Retorna o tamanho da maior lista e o numero que a gerou
+-- Demorou muito necessário paralelizar
 
 -- Validação Simples
 main = do
