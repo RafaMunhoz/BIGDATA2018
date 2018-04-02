@@ -24,4 +24,4 @@ somaDiag2 mat
 
 -- Validação Simples
 main=do
-print (somaDiag2 [[10,4,12], [2,4,6], [2,3,6]])
+print (somaDiag2 [[3,7,2,12], [4,5,4,6], [7,11,3,6], [14,1,2,2]])
