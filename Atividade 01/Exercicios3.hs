@@ -52,7 +52,7 @@ collatzLoop cont x
   | otherwise = collatzLoop (cont+1) $ collatz x
   
 collatzLen :: Integer -> Integer
-collatzLen x = collatzLoop 0 x
+collatzLen x = collatzLoop 1 x
 
 -- 08: Encontre o número x entre 1 e 1.000.000 que tem a maior sequência de Collatz. (Project Euler 14)
 
