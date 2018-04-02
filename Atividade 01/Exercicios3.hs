@@ -59,7 +59,7 @@ collatzLen x = collatzLoop 1 x
 colmax x n = x `max` (collatzLen n, n) 
 search nums = foldl colmax (1,1) nums
 projectEuler14 = search [1..1000000]
--- Retorna o tamanho da maior lista e o numero que a gerou
+-- Retorna o tamanho da maior lista e o numero que a gerou (525,837799)
 -- Demorou muito necessário paralelizar
 
 -- Validação Simples
