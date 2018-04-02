@@ -5,14 +5,23 @@ showMat = unlines . map (unwords . map show)
 matId n = [ [fromEnum $ i == j | i <- [1..n]] | j <- [1..n]]
 
 -- 02 Faça uma função que calcule a soma da diagonal principal de uma matriz.
+somaDiag1:: [[Int]]->Int
+somaDiag1  mat
+    | nrows  == ncols  =  sum  [ mat!!i!!i  | i <- [0..nrows-1]  ]
+    | otherwise =  error "matriz nao e quadrada"
+    where
+        nrows = length mat
+        ncols = length (mat!!0)        
 
 -- 03 Faça uma função que calcule a soma da diagonal secundária de uma matriz.
-secondary i j mat sum
-  | j==0 = sum
-  | otherwise = (mat!(i,j)) + secondary (i+1) (j-1) mat sum
-  
-sumsecondary mat = secondary 0 6 mat 0
+somaDiag2::[[Int]]->Int
+somaDiag2 mat
+  | nrows  == ncols  =  sum [ mat!!i!!(ncols-1-i)  | i <- [0..nrows-1]  ]
+  | otherwise =  error "matriz nao e quadrada"
+  where
+    nrows = length mat
+    ncols = length (mat!!0)       
 
 -- Validação Simples
-main = do
-  putStr $ sumsecondary $ matId 6
+main=do
+print (somaDiag2 [[10,4,12], [2,4,6], [2,3,6]])
