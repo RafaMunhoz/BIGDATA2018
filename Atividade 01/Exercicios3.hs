@@ -11,16 +11,27 @@ divisivelRange x n count
 divisivel20 :: Integer -> Bool
 divisivel20 n = divisivelRange n 20 1
 
+-- 02: Crie uma função projectEuler5 que retorna o primeiro número natural que retorna True para a função do exercício anterior. Pense em como reduzir o custo computacional.
+-- Minha primeira versao (Ruim Computacionalmente)
 encontra count
   |divisivel20 count = count
-  |otherwise = encontra (count+1)
+  |otherwise = encontra (count+20)  
+projectEuler5 = encontra 20
 
--- 02: Crie uma função projectEuler5 que retorna o primeiro número natural que retorna True para a função do exercício anterior. Pense em como reduzir o custo computacional.
-
+--Versão melhorada (encontrada no proprio site do projeto Euler)
+projectEuler5 = foldr1 lcm [1..20]
+--A foldr1 ela aplica a partir do fim da lista uma operação entre os itens, nesse caso lcm, o menor multiplo comum, 
+--dessa maneira encontrando o menor multiplo entre 20 e 19 que é 380, entre 380 e 18, 3420, entre 3420 e 17, 58140, 
+--entre 58140 e 16, 232560, até encontrar entre 21162960 e 11 que é a resposta 232792560. (ele continua até 232792560 e 1)
+  
 -- 03: Crie a lista de números de Fibonacci utilizando uma função geradora.
+fibs = 0 : 1 : prox fibs
+  where
+    prox (x:t@(y:resto)) = (x+y) : prox t
 
 -- 04: Utilizando a lista anterior, calcule a soma dos números de Fibonacci pares dos valores que não excedem 4.000.000. (Project Euler 2)
-
+projectEuler2 = sum [ x | x <- takeWhile (<= 4000000) fibs, even x]
+    
 -- 05: Faça uma função para calcular o produto escalar entre dois vetores.
 
 -- 06: Crie a função collatz x que retorna x/2, se x for par e (3x+1) se for ímpar.
