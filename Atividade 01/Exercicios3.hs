@@ -12,13 +12,14 @@ divisivel20 :: Integer -> Bool
 divisivel20 n = divisivelRange n 20 1
 
 -- 02: Crie uma função projectEuler5 que retorna o primeiro número natural que retorna True para a função do exercício anterior. Pense em como reduzir o custo computacional.
--- Minha primeira versao (Ruim Computacionalmente)
+-- Minha versao
+encontra :: Integer -> Integer
 encontra count
   |divisivel20 count = count
   |otherwise = encontra (count+20)  
 projectEuler5 = encontra 20
 
---Versão melhorada (encontrada no proprio site do projeto Euler)
+--Versão melhorada (encontrada no site https://wiki.haskell.org/Euler_problems/1_to_10)
 projectEuler5 = foldr1 lcm [1..20]
 --A foldr1 ela aplica a partir do fim da lista uma operação entre os itens, nesse caso lcm, o menor multiplo comum, 
 --dessa maneira encontrando o menor multiplo entre 20 e 19 que é 380, entre 380 e 18, 3420, entre 3420 e 17, 58140, 
@@ -33,10 +34,25 @@ fibs = 0 : 1 : prox fibs
 projectEuler2 = sum [ x | x <- takeWhile (<= 4000000) fibs, even x]
     
 -- 05: Faça uma função para calcular o produto escalar entre dois vetores.
+escalarProd :: Num a => [a] -> [a] -> a 
+escalarProd a b 
+  | length a == length b = sum (zipWith (*) a b)
+  | otherwise = error "Os tamanhos dos vetores devem ser iguais"
 
 -- 06: Crie a função collatz x que retorna x/2, se x for par e (3x+1) se for ímpar.
+collatz :: Integer -> Integer
+collatz x
+     | mod x 2 == 0 = div x 2
+     | otherwise =  3 * x + 1
 
 -- 07: Implemente uma função collatzLen x que retorna o tamanho da lista formada pela aplicação repetida de collatz sobre o valor x até que essa chegue no número 1.
+collatzLoop :: Integer -> Integer -> Integer
+collatzLoop cont x 
+  | x == 1 = cont
+  | otherwise = collatzLoop (cont+1) $ collatz x
+  
+collatzLen :: Integer -> Integer
+collatzLen x = collatzLoop 0 x
 
 -- 08: Encontre o número x entre 1 e 1.000.000 que tem a maior sequência de Collatz. (Project Euler 14)
 
@@ -44,6 +60,6 @@ projectEuler2 = sum [ x | x <- takeWhile (<= 4000000) fibs, even x]
 
 -- Validação Simples
 main = do
-  let ex1a = encontra 1
+  let test = encontra 1
 
-  print (ex1a)
+  print (test)
