@@ -55,12 +55,47 @@ collatzLen :: Integer -> Integer
 collatzLen x = collatzLoop 1 x
 
 -- 08: Encontre o número x entre 1 e 1.000.000 que tem a maior sequência de Collatz. (Project Euler 14)
---Versão encontrada no site https://wiki.haskell.org/Euler_problems/11_to_20
 colmax x n = x `max` (collatzLen n, n) 
 search nums = foldl colmax (1,1) nums
 projectEuler14 = search [1..1000000]
--- Retorna o tamanho da maior lista e o numero que a gerou (525,837799)
--- Demorou muito necessário paralelizar
+-- Retorna o tamanho da maior lista e o numero que a gerou (525,837799), demorou muito 
+--Versão encontrada no site https://wiki.haskell.org/Euler_problems/11_to_20
+main = print soln
+    where
+        s1 = search [2..500000]
+        s2 = search [500001..1000000]
+        soln = s2 `par` (s1 `pseq` max s1 s2)
+        
+--Versão proposta pelo professor
+import Data.List
+import Data.Ord
+import qualified Data.Array as Array
+
+nextCollatz :: Integer -> Integer
+nextCollatz x
+  | even x    = x `div` 2
+  | otherwise = 3*x + 1
+     
+memoLenCollatz = lengths
+  where
+    lengths = Array.listArray (1, 1000000) [memoLen x | x <- [1..1000000]]
+    memoLen 1 = 1 
+    memoLen 2 = 2
+    memoLen 3 = 2
+    memoLen n 
+      | next <= 1000000 = 1 + lengths Array.! next
+      | otherwise       = 1 + memoLen next
+      where next = nextCollatz n
+    
+numeros = [1..1000000]    
+
+lengths = take 1000000
+        $ Array.assocs memoLenCollatz   -- retorna lista de tuplas (indice, valor)
+
+maior = fst $ maximumBy (comparing snd) lengths  -- retorna o maior elemento da lista comparado pelo segundo elemento da array
+
+main = do 
+  print maior
 
 -- Validação Simples
 main = do
